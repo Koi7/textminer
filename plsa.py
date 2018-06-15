@@ -127,7 +127,6 @@ class Corpus(object):
         '''
         Model topics.
         '''
-        print("EM iteration begins...")
         # Get vocabulary and number of documents.
         self.build_vocabulary()
         number_of_documents = len(self.documents)
@@ -149,7 +148,6 @@ class Corpus(object):
         self.topic_prob = np.zeros([number_of_documents, len(self.vocabulary), number_of_topics], dtype=np.float) # P(z | d, w)
 
         # Initialize
-        print("Initializing...")
         # randomly assign values
         self.document_topic_prob = np.random.random(size = (number_of_documents, number_of_topics))
         for d_index in range(len(self.documents)):
@@ -183,8 +181,6 @@ class Corpus(object):
         """
         # Run the EM algorithm
         for iteration in range(max_iter):
-            print(("Iteration #" + str(iteration + 1) + "..."))
-            print("E step:")
             for d_index, document in enumerate(self.documents):
                 for w_index in range(vocabulary_size):
                     prob = self.document_topic_prob[d_index, :] * self.topic_word_prob[:, w_index]
@@ -197,7 +193,6 @@ class Corpus(object):
                     else:
                         normalize(prob)
                     self.topic_prob[d_index][w_index] = prob
-            print("M step:")
             # update P(w | z)
             for z in range(number_of_topics):
                 for w_index in range(vocabulary_size):

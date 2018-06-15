@@ -1,4 +1,5 @@
 def get_data(path=''):
+	"""Gets content of each file in path and adds it to list. Returns list with files contents"""
 	import os
 	import re
 	import string

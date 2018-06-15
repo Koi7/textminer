@@ -16,6 +16,8 @@ PATH_TO_RAW_DATA                  = './data'
 TOPICS_NUM                        = 10
 
 def generate_temp_files_for_lda_or_lsa(documents_as_bag_of_words=[], word2id_file_path=FILE_DEFAULT_GENSIM_WORD2ID_DICT, tfidf_file_path=FILE_DEFAULT_GENSIM_TF_IDF_MATRIX):
+	""" Additional data preparation for LDA and LSA methods. """
+
 	import gensim
 
 	dictionary = gensim.corpora.Dictionary(documents_as_bag_of_words)
@@ -31,6 +33,8 @@ def generate_temp_files_for_lda_or_lsa(documents_as_bag_of_words=[], word2id_fil
 
 
 def lsa(documents_as_bag_of_words=[], topics_num=TOPICS_NUM, write_results_to=FILE_DEFAULT_GENSIM_LSA_RESULTS):
+	""" Performs topic modeling with LSA method. """
+
 	import gensim
 
 	temp_files = generate_temp_files_for_lda_or_lsa(documents_as_bag_of_words)
@@ -46,6 +50,8 @@ def lsa(documents_as_bag_of_words=[], topics_num=TOPICS_NUM, write_results_to=FI
 
 
 def lda(documents_as_bag_of_words=[], topics_num=TOPICS_NUM, write_results_to=FILE_DEFAULT_GENSIM_LDA_RESULTS):
+	""" Performs topic modeling with LDA method. """
+
 	import gensim
 
 	temp_files = generate_temp_files_for_lda_or_lsa(documents_as_bag_of_words)
@@ -60,12 +66,12 @@ def lda(documents_as_bag_of_words=[], topics_num=TOPICS_NUM, write_results_to=FI
 		f.close()
 
 def plsa(data_paths=[PATH_TO_RAW_DATA], topics_num=TOPICS_NUM, write_results_to=FILE_DEFAULT_PLSA_RESULTS):
+	""" Performs topic modeling with PLSA method. """
+	
 	import plsa
 	import glob
 	import os
-	# PLSA TOPIC MODELING
 	corpus = plsa.Corpus() # instantiate corpus
-	# iterate over the files in the directory.
 	document_paths = data_paths
 	for document_path in document_paths:
 	    for document_file in glob.glob(os.path.join(document_path, '*.txt')):

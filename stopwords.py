@@ -1,4 +1,6 @@
 def list_stopwords(lang='en'):
+	""" Makes list of stopwords from source file. """
+
 	import os
 
 	filename = 'stopwords_{}.txt'.format(lang)

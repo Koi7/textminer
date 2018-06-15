@@ -1,4 +1,6 @@
 def process_documents(documents=[], stopwords=[]):
+	""" Performs text processing for text mining. Makes bag-of-words from each document and returns list of bags-or-words. """
+
 	# remove punctuation
 	documents = remove_punctuation_and_digits(documents)
 	# make bag-of-words
@@ -11,6 +13,8 @@ def process_documents(documents=[], stopwords=[]):
 	return documents_as_bag_of_words
 
 def remove_punctuation_and_digits(documents=[]):
+	""" Removes puncutation and digits from each document. """
+
 	import re
 	import string
 	# regex to remove punctuation characters
@@ -22,6 +26,7 @@ def remove_punctuation_and_digits(documents=[]):
 	return documents_no_punctuation
 
 def make_bag_of_words(documents=[]):
+	""" Splits documents' contents to separate words. """
 	return [[word for word in document.lower().split()] for document in documents]
 
 def remove_uniq_words(documents_as_bag_of_words=[]):
@@ -35,4 +40,5 @@ def remove_uniq_words(documents_as_bag_of_words=[]):
 	return [[term for term in document if frequency[term] > 1] for document in documents_as_bag_of_words]
 
 def remove_stopwords(documents_as_bag_of_words=[], stopwords=[]):
+	""" Removes stopwords according to passed stopwords list. """
 	return [[term for term in document if term not in stopwords] for document in documents_as_bag_of_words]
